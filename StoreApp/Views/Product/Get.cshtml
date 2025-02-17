@@ -1,0 +1,12 @@
+@section Header {
+    <div>
+        Product Details only get
+    </div>
+}
+<h2>@Model.ProductName</h2>
+<p>@Model.Price</p>
+<a class="btn btn-primary" asp-controller="Home" asp-action="Index">
+    <i class="fa-solid fa-house fa-xl"></i> Get Back Home</a>
+<a  class="btn btn-outline-primary" asp-controller="Product" asp-action="Index">Back to Products
+    <i class="fa-solid fa-list-ul fa-xl"></i>
+</a>
