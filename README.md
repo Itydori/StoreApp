@@ -91,5 +91,5 @@ This project is licensed under the [MIT License](LICENSE).
 
 ---
 
-For further inquiries, contact [your-email@example.com](mailto\:itydori@gmail.com).
+For further inquiries, contact [itydori@gmail.com](mailto\:itydori@gmail.com).
 
