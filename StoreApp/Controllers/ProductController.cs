@@ -15,17 +15,22 @@ namespace StoreApp.Controllers
         {
             _serviceManager = serviceManager;
         }
-        
-         public IActionResult Get([FromRoute(Name ="id")] int id)
-         {
-             var model = _serviceManager.ProductService.GetOneProduct(id, false);
-             return View(model);
-         }
+
+        public IActionResult Get([FromRoute(Name = "id")] int id)
+        {
+            var model = _serviceManager.ProductService.GetOneProduct(id, false);
+            return View(model);
+        }
 
         public IActionResult Index()
         {
-            var model = _serviceManager.ProductService.GetAllProducts( false).ToList();
+            var model = _serviceManager.ProductService.GetAllProducts(false).ToList();
+            if (model == null)
+            {
+                // Null döndüğünde burada hata mesajı alabilirsiniz.
+                Console.WriteLine("Veri null dönüyor");
+            }
             return View(model);
-       }
+        }
     }
 }

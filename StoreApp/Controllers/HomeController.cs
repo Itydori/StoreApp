@@ -1,14 +1,18 @@
 using Microsoft.AspNetCore.Mvc;
+using Repositories.Contracts;
 
-namespace StoreApp.Controllers
+public class HomeController : Controller
 {
-    public class HomeController : Controller
-    {
-        public IActionResult Index()
-        {
-            return View();
-        }
+    private readonly IProductRepository _productRepository;
 
-        
+    public HomeController(IProductRepository productRepository)
+    {
+        _productRepository = productRepository;
+    }
+
+    public IActionResult Index()
+    {
+        var products = _productRepository.GetAllProducts(false);
+        return View(products);
     }
 }
