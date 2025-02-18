@@ -1,12 +1,43 @@
 @section Header {
-    <div>
-        Product Details only get
+    <div class="row">
+        <div class="col-md-12">
+            <div class="text-center">
+                <h5>
+                    @Model.ProductName
+                </h5>
+                <img class="img-fluid shadow rounded-3 my-3" src="@Model?.ImageUrl" alt="@Model?.ProductName" />
+                <p class="lead text-danger strong ">
+                    @Model.Price.ToString("C")
+                </p>
+            </div>
+        </div>
     </div>
 }
-<h2>@Model.ProductName</h2>
+<h2></h2>
 <p>@Model.Price</p>
 <a class="btn btn-primary" asp-controller="Home" asp-action="Index">
     <i class="fa-solid fa-house fa-xl"></i> Get Back Home</a>
-<a  class="btn btn-outline-primary" asp-controller="Product" asp-action="Index">Back to Products
+<a class="btn btn-outline-primary" asp-controller="Product" asp-action="Index">Back to Products
     <i class="fa-solid fa-list-ul fa-xl"></i>
 </a>
+@* 
+@section Header {
+    <div class="text-center">
+        <h3>Product Details only get</h3>
+    </div>
+}
+
+<div class="text-center">
+    <h2>@Model.ProductName</h2>
+    <img src="@Model.ImageUrl" alt="@Model.ProductName" class="img-fluid mb-3" />
+    <p>@Model.Description</p>
+    <p><strong>Price:</strong> @Model.Price</p>
+</div>
+
+<div class="text-center mt-4">
+    <a class="btn btn-primary" asp-controller="Home" asp-action="Index">
+        <i class="fa-solid fa-house fa-xl"></i> Get Back Home</a>
+    <a class="btn btn-outline-primary" asp-controller="Product" asp-action="Index">
+        Back to Products <i class="fa-solid fa-list-ul fa-xl"></i>
+    </a>
+</div> *@

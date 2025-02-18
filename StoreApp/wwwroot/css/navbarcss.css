@@ -1,11 +1,13 @@
 /* Modern ve şık navbar stilleri */
 .navbar {
-    background: linear-gradient(to right, #3498db, #2980b9);
+   background: rgb(95,164,210);
+background: linear-gradient(90deg, rgba(95,164,210,1) 0%, rgba(44,62,80,1) 100%);
     padding: 1rem;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
  }
  .admin-navbar {
-   background: linear-gradient(to right, #2c3e50, #34495e);
+   background: rgb(44,62,80);
+background: linear-gradient(90deg, rgba(44,62,80,1) 0%, rgba(95,164,210,1) 100%);
    padding: 1rem;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }

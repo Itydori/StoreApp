@@ -56,7 +56,7 @@ namespace StoreApp.Areas.Admin.Controllers
         //     //file operations
         //     if (ModelState.IsValid){
         //         var fileName = Path.GetFileName(file.FileName);
-            
+
         //         String path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot","images",file.FileName);
         //         using (var stream = new FileStream(path, FileMode.Create))
         //         {
@@ -67,11 +67,12 @@ namespace StoreApp.Areas.Admin.Controllers
         //         return RedirectToAction(nameof(Index));
         //     }
         //     return View();
-        
+
         private SelectList GetCategoriesSelectList()
         {
             return new SelectList(_manager.CategoryService.GetAllCategories(false), "CategoryID", "CategoryName", 1);
         }
+        [HttpGet("Update/{id}")]
 
         public IActionResult Update([FromRoute(Name = "id")] int id)
         {
@@ -80,12 +81,19 @@ namespace StoreApp.Areas.Admin.Controllers
             var model = _manager.ProductService.GetOneProductForUpdate(id, false);
             return View(model);
         }
-        [HttpPost]
+        [HttpPost("Update/{id}")]
         [ValidateAntiForgeryToken]
-        public IActionResult Update([FromForm] ProductDtoForUpdate productDto)
+
+        public async Task<IActionResult> Update([FromForm] ProductDtoForUpdate productDto, IFormFile file)
         {
             if (ModelState.IsValid)
             {
+                string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", file.FileName);
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+                productDto.ImageUrl = String.Concat($"/images/{file.FileName}");
                 _manager.ProductService.UpdateOneProduct(productDto);
                 return RedirectToAction(nameof(Index));
             }
