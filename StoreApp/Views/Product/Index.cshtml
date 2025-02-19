@@ -8,16 +8,8 @@
     <div class="col-md-9">
         <div class="row my-3">
             @foreach (Product product in Model)
-            {
+      {
                 <partial name="_ProductCard" model="@product" />
             }
         </div>
     </div>
-</div>
-
-@section Footer
-{
-    <div>
-        <p>Footer</p>
-    </div>
-}
