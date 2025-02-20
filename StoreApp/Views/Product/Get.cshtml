@@ -1,25 +1,45 @@
 @section Header {
     <div class="row">
-        <div class="col-md-12" >
+        <div class="col-md-12">
             <div class="text-center">
                 <h5>
                     @Model.ProductName
                 </h5>
                 <img class="img-fluid shadow rounded-3 my-3" src="@Model?.ImageUrl" alt="@Model?.ProductName" />
-                <p class="lead text-danger strong ">
+                <p class="lead text-danger strong">
                     @Model.Price.ToString("C")
                 </p>
             </div>
         </div>
     </div>
 }
+
 <h2></h2>
 <p>@Model.Price</p>
+
 <a class="btn btn-primary" asp-controller="Home" asp-action="Index">
-    <i class="fa-solid fa-house fa-xl"></i> Get Back Home</a>
-<a class="btn btn-outline-primary" asp-controller="Product" asp-action="Index">Back to Products
-    <i class="fa-solid fa-list-ul fa-xl"></i>
+    <i class="fa-solid fa-house fa-xl"></i> Get Back Home
 </a>
+
+<a class="btn btn-outline-primary" asp-controller="Product" asp-action="Index">
+    Back to Products <i class="fa-solid fa-list-ul fa-xl"></i>
+</a>
+
+<!-- Burada CSS kodlarını yazabiliriz -->
+<style>
+    /* Sayfa genelinde yatay kaydırma çubuğunu engellemek */
+    body {
+        overflow-x: hidden; /* Yatay kaydırmayı gizler */
+        margin: 0;
+        padding: 0;
+    }
+    /* Sayfa içeriği genişliğini aşarsa, kaydırmayı engelleme */
+    html, body {
+        width: 100%;
+        overflow-x: hidden;
+    }
+</style>
+
 @* 
 @section Header {
     <div class="text-center">
