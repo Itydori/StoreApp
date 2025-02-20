@@ -193,20 +193,16 @@
 </html>  *@
 
 @model IEnumerable<Product>
-    @using Entities.Models
+@using Entities.Models
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KyZXEJX1+K6E1cv5vczR6p8R5vddedr9gh6bniKJz17B3n7zjSxVssZba7T3/ZB34" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEJX1+K6E1cv5vczR6p8R5vddedr9gh6bniKJz17B3n7zjSxVssZba7T3/ZB34" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
-        body,
-        html {
+        body, html {
             margin: 0;
             padding: 0;
             height: 100%;
@@ -214,35 +210,30 @@
 
         .video-background {
             position: fixed;
-            /* Videoyu sabitler ve tam ekran yapar */
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
             z-index: -1;
-            /* Video arka planda kalır */
         }
 
         .contact-form-container {
             width: 100%;
-            max-width: 900px;
+            max-width: 700px;
             padding: 30px;
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            /* Formu tam ortalar */
             background: transparent;
             backdrop-filter: blur(10px);
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
             z-index: 1;
-            /* Formun ön planda olması için */
             text-align: center;
             color: white;
         }
-
 
         .contact-form-product {
             width: 100%;
@@ -252,42 +243,42 @@
             top: 80%;
             left: 50%;
             transform: translate(-50%, -50%);
-            /* Formu tam ortalar */
             background: transparent;
             backdrop-filter: blur(18px);
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 1);
             z-index: 1;
-            /* Formun ön planda olması için */
             color: white;
             overflow: hidden;
         }
+
         .marquee {
             width: 100%;
             overflow: hidden;
             white-space: nowrap;
-            /* Metnin tek satırda kalmasını sağlar */
+            
             display: block;
         }
-        .marquee span {
-            width: 100%;
-            display: inline-block;
-            transform: translateX(100%);
-            /* Yazının başlangıcı formun dışından gelir */
-            animation: scroll-left 48s linear infinite;
-            /* Metni soldan sağa doğru hareket ettirir */
-        }
-@@keyframes scroll-left {
-    from {
-        transform: translateX(100%);  /* Metin sağdan başlar */
-    }
-    to {
-        transform: translateX(-100%);  /* Metin soldan çıkar */
-    }
-}
 
-        .contact-form input,
-        .contact-form textarea {
+        .marquee span {
+                        width: 100%;
+
+            display: inline-block;
+            animation: scroll-left 48s linear infinite;
+            transform: translateX(100%);
+        }
+
+        @@keyframes scroll-left {
+            from {
+                transform: translateX(100%);
+            }
+
+            to {
+                transform: translateX(-100%);
+            }
+        }
+
+        .contact-form input, .contact-form textarea {
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid #ddd;
             color: white;
@@ -305,25 +296,18 @@
             white-space: nowrap;
             overflow: hidden;
             border-right: 4px solid #212121;
-            animation: cursor 0.5s step-start infinite,
-                text 3.8s steps(40) alternate infinite;
+            animation: cursor 0.5s step-start infinite, text 3.8s steps(40) alternate infinite;
             font-size: clamp(2rem, 2.8vw, 5rem);
             margin-bottom: 20px;
         }
-        
 
-        /* Cursor animation */
-        @@keyframes cursor
-        {
-
-                0%,
-                100% {
-                    border-color: #212121;
-                }
+        @@keyframes cursor {
+            0%, 100% {
+                border-color: #212121;
             }
+        }
 
-            @@keyframes text
-            {
+        @@keyframes text {
             0% {
                 width: 0;
             }
@@ -335,7 +319,6 @@
 
         .btn-custom {
             background: rgba(0, 123, 255, 0.6);
-            /* Semi-transparent blue */
             border: none;
             color: white;
             font-size: 1.2rem;
@@ -345,7 +328,6 @@
             align-items: center;
             border-radius: 5px;
             backdrop-filter: blur(5px);
-            /* Blur effect on button background */
         }
 
         .btn-custom:hover {
@@ -354,6 +336,18 @@
 
         .btn-custom i {
             margin-left: 10px;
+        }
+
+        .scramble-text {
+            font-size: 2rem;
+            font-family: 'Consolas', sans-serif;
+            color: #ffffff;
+            display: inline-block;
+        }
+
+        .dud {
+            color: #ffffff;
+            transition: color 0.1s ease-in-out;
         }
     </style>
 </head>
@@ -368,27 +362,104 @@
 
     <!-- Form container -->
     <div class="contact-form-container">
-        <h2 class="typewriter">Welcome to My StoreApp</h2>
-        <a href="/Product/Index" class="btn btn-custom">
-            Go to Product Page
-            <i class="fa-regular fa-hand-pointer fa-xl"></i>
-        </a>
+        <h2 class="scramble-text">Welcome to My StoreApp</h2>
+        <div>
+            <a href="/Product/Index" class="btn btn-custom">
+                Go to Product Page
+                <i class="fa-regular fa-hand-pointer fa-xl"></i>
+            </a>
+        </div>
     </div>
+
     <div class="contact-form-product">
-    <div class="marquee">
-        <span>
-            @foreach (var Product in Model)
-            {
-                @Product.ProductName <text>&nbsp;&nbsp;|&nbsp;&nbsp;</text>
-            }
-        </span>
+        <div class="marquee">
+            <span>
+                @foreach (var Product in Model)
+                {
+                    @Product.ProductName <text>&nbsp;&nbsp;|&nbsp;&nbsp;</text>
+                }
+            </span>
+        </div>
     </div>
-</div>
 
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-pzjw8f+ua7Kw1TIq0p3dXfR2fWvkdZGflrOReC/qh0rPaAA7c3aThkzJZMGmDJzTt"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq0p3dXfR2fWvkdZGflrOReC/qh0rPaAA7c3aThkzJZMGmDJzTt" crossorigin="anonymous"></script>
 </body>
+<script>
+    class TextScramble {
+        constructor(el) {
+            this.el = el
+            this.chars = '!<>-_\\/[]{}—=+*^?#________'
+            this.update = this.update.bind(this)
+        }
+
+        setText(newText) {
+            const oldText = this.el.innerText
+            const length = Math.max(oldText.length, newText.length)
+            const promise = new Promise((resolve) => this.resolve = resolve)
+            this.queue = []
+            for (let i = 0; i < length; i++) {
+                const from = oldText[i] || ''
+                const to = newText[i] || ''
+                const start = Math.floor(Math.random() * 100)
+                const end = start + Math.floor(Math.random() * 100)
+                this.queue.push({ from, to, start, end })
+            }
+            cancelAnimationFrame(this.frameRequest)
+            this.frame = 0
+            this.update()
+            return promise
+        }
+
+        update() {
+            let output = ''
+            let complete = 0
+            for (let i = 0, n = this.queue.length; i < n; i++) {
+                let { from, to, start, end, char } = this.queue[i]
+                if (this.frame >= end) {
+                    complete++
+                    output += to
+                } else if (this.frame >= start) {
+                    if (!char || Math.random() < 0.28) {
+                        char = this.randomChar()
+                        this.queue[i].char = char
+                    }
+                    output += `<span class="dud">${char}</span>`
+                } else {
+                    output += from
+                }
+            }
+            this.el.innerHTML = output
+            if (complete === this.queue.length) {
+                this.resolve()
+            } else {
+                this.frameRequest = requestAnimationFrame(this.update)
+                this.frame++
+            }
+        }
+
+        randomChar() {
+            return this.chars[Math.floor(Math.random() * this.chars.length)]
+        }
+    }
+
+    const phrases = [
+        'Welcome to My StoreApp',
+        'Browse our exclusive products',
+        'Check out our latest offers',
+        'Enjoy shopping with us'
+    ]
+
+    const el = document.querySelector('.scramble-text')
+    const fx = new TextScramble(el)
+
+    let counter = 0
+    const next = () => {
+        fx.setText(phrases[counter]).then(() => {
+            setTimeout(next, 1400)
+        })
+        counter = (counter + 1) % phrases.length
+    }
+    next()
+</script>
 
 </html>
