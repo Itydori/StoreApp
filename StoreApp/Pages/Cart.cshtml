@@ -1,5 +1,90 @@
+@* @page "/cart"
+@model CartModel
+<div>
+    <div class="text-center display-6">
+        Cart(@Model.Cart.Lines.Count())
+    </div> 
+    <table class="table table-hover">
+        <thead>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>SubTotal</th>
+            <th></th>
+        </thead>
+        <tbody>
+            @foreach (var line in Model.Cart.Lines)
+            {
+                <tr>
+                    <td>@line.Product.ProductName</td>
+                    <td>
+                        <button class="btn btn-sm btn-secondary" asp-page-handler="DecreaseQuantity" asp-route-id="@line.Product.ProductID">-</button>
+                        @line.Quantity
+                        <button class="btn btn-sm btn-secondary" asp-page-handler="IncreaseQuantity" asp-route-id="@line.Product.ProductID">+</button>
+                    </td>
+                    <td>@line.Product.Price</td>
+                    <td>@(line.Quantity * line.Product.Price)</td>
+                    <td>
+                        <button class="btn btn-danger" asp-page-handler="RemoveLine" asp-route-id="@line.Product.ProductID">Remove</button>
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Total: @Model.Cart.ComputeTotalValue()</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div> *@
+
 @page "/cart"
 @model CartModel
-Cart
-using StoreApp.Pages;
-#line default
+
+<div>
+    <div class="text-center display-6">
+    </div>
+    <table class="table table-hover">
+        <thead>
+            <th>Image</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>SubTotal</th>
+            <th></th>
+        </thead>
+        <tbody>
+            @foreach (var line in Model.Cart?.Lines ?? Enumerable.Empty<CartLine>())
+            {
+                <tr>
+                    <td><img class="img-fluid shadow rounded-3" src="@line.Product.ImageUrl"
+                            style="max-height: 50px; width: auto;"></td>
+                    <td>@line.Product.ProductName</td>
+                    <td>@line.Quantity</td>
+                    <td>@line.Product.Price.ToString("c")</td>
+                    <td>@((line.Product.Price * line.Quantity).ToString("c2"))</td>
+                    <td>
+                        <form method="post" asp-page-handler="Remove">
+                            <input type="hidden" name="id" value="@line.Product.ProductID" />
+                            <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fa fa-trash"></i> Remove
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td></td>
+                <td>@(Model.Cart?.Lines?.Count() ?? 0)</td>
+                <td>@(Model.Cart?.Lines?.Sum(l => l.Quantity) ?? 0)</td>
+                <td></td>
+                <td colspan="3" class="text-right text-danger">@Model.Cart?.ComputeTotalValue().ToString("c2")</td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
