@@ -1,3 +1,5 @@
+@using System.Net.Http
+@using Microsoft.AspNetCore.Http
 @* @model Product
 
 <div class="col-sm-12 col-md-4  my-2 ">
@@ -19,12 +21,18 @@
         <div class="card-body">
             <h5 class="card-title">@Model.ProductName</h5>
             <p class="card-text">@Model.Price</p>
-            <a asp-action="Get" asp-route-id="@Model.ProductID" class="btn btn-primary">Details
-                <i class="fa-solid fa-circle-info"></i>
-            </a>
-            <a asp-action="AddToCart" asp-route-id="@Model.ProductID" class="btn btn-success">Add to Cart
-                <i class="fa-solid fa-circle-plus"></i>
-            </a>
+            <div class="btn btn-group">
+                    <a asp-action="Get" asp-route-id="@Model.ProductID" class="btn btn-primary">Details
+                        <i class="fa-solid fa-circle-info"></i>
+                    </a>
+                <form id="@Model.ProductID" asp-page="/cart" method="post">
+                    <input type="hidden" asp-for="ProductID"/>
+                    <input type="hidden" name="returnUrl" value="/Product/Get/@Model.ProductID" />
+                    <button type="submit" class="btn btn-outline-primary">
+                        <i class="fa fa-cart-plus" 18rem></i>Add to Cart
+                    </button>
+                    </form>
+            </div>
         </div>
     </div>
 </div>
