@@ -40,14 +40,16 @@ namespace StoreApp.Pages
         }
         public IActionResult OnPostRemove(int id, string returnUrl)
         {
-            Product? product = _manager.ProductService.GetOneProduct(id, false);
-            if (product is not null)
-            {
-                // Cart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
-            Cart.RemoveLine(Cart.Lines.First(cl => cl.Product.ProductID.Equals(id)).Product);
-                // HttpContext.Session.SetJson("cart", Cart);
-            }
-            return Page();
+           Product? product = _manager.ProductService.GetOneProduct(id, false);
+    if (product is not null)
+    {
+        var lineItem = Cart.Lines.FirstOrDefault(cl => cl.Product.ProductID.Equals(id));
+        if (lineItem != null)
+        {
+            Cart.RemoveLine(lineItem.Product);
+        }
+    }
+    return Page();
         }
     }
 }
