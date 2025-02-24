@@ -21,5 +21,15 @@ namespace StoreApp.Models
             base.AddItem(product, quantity);
             Session?.SetJson<SessionCart>("cart", this);
         }
+        public override void Clear()
+        {
+            base.Clear();
+            Session?.Remove("cart");
+        }
+        public override void RemoveLine(Product product)
+        {
+            base.RemoveLine(product);
+            Session?.SetJson<SessionCart>("cart", this);
+        }
     }
 }
