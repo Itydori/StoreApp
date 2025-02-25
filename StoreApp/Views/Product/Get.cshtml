@@ -16,25 +16,38 @@
 
 <h2></h2>
 <p>@Model.Price</p>
+<div class="text-center">
+    <div class="btn-group">
+        <a class="btn btn-primary" asp-controller="Home" asp-action="Index">
+            <i class="fa-solid fa-house fa-xl"></i> Get Back Home
+        </a>
+        <form id="@Model.ProductID" asp-page="/cart" method="post">
+            <input type="hidden" name="ProductID" value="@Model.ProductID" />
+            <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+            <button type="submit" class="btn btn-outline-primary">
+                <i class="fa fa-cart-plus fa-xl"></i> Add to Cart
+            </button>
+        </form>
 
-<a class="btn btn-primary" asp-controller="Home" asp-action="Index">
-    <i class="fa-solid fa-house fa-xl"></i> Get Back Home
-</a>
-
-<a class="btn btn-outline-primary" asp-controller="Product" asp-action="Index">
-    Back to Products <i class="fa-solid fa-list-ul fa-xl"></i>
-</a>
+        <a class="btn btn-outline-primary" asp-controller="Product" asp-action="Index">
+            Back to Products <i class="fa-solid fa-list-ul fa-xl"></i>
+        </a>
+    </div>
+</div>
 
 <!-- Burada CSS kodlarını yazabiliriz -->
 <style>
     /* Sayfa genelinde yatay kaydırma çubuğunu engellemek */
     body {
-        overflow-x: hidden; /* Yatay kaydırmayı gizler */
+        overflow-x: hidden;
+        /* Yatay kaydırmayı gizler */
         margin: 0;
         padding: 0;
     }
+
     /* Sayfa içeriği genişliğini aşarsa, kaydırmayı engelleme */
-    html, body {
+    html,
+    body {
         width: 100%;
         overflow-x: hidden;
     }

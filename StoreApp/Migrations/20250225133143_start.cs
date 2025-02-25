@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -18,11 +19,31 @@ namespace StoreApp.Migrations
                 {
                     CategoryID = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    CategoryName = table.Column<string>(type: "TEXT", nullable: false)
+                    CategoryName = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Categories", x => x.CategoryID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    OrderId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    OrderName = table.Column<string>(type: "TEXT", nullable: false),
+                    Line1 = table.Column<string>(type: "TEXT", nullable: false),
+                    Line2 = table.Column<string>(type: "TEXT", nullable: true),
+                    Line3 = table.Column<string>(type: "TEXT", nullable: true),
+                    City = table.Column<string>(type: "TEXT", nullable: true),
+                    GiftWrap = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Shipped = table.Column<bool>(type: "INTEGER", nullable: false),
+                    OrderedAt = table.Column<DateTime>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.OrderId);
                 });
 
             migrationBuilder.CreateTable(
@@ -45,6 +66,32 @@ namespace StoreApp.Migrations
                         column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "CategoryID");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CartLine",
+                columns: table => new
+                {
+                    CartLineId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ProductID = table.Column<int>(type: "INTEGER", nullable: false),
+                    Quantity = table.Column<int>(type: "INTEGER", nullable: false),
+                    OrderId = table.Column<int>(type: "INTEGER", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CartLine", x => x.CartLineId);
+                    table.ForeignKey(
+                        name: "FK_CartLine_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "OrderId");
+                    table.ForeignKey(
+                        name: "FK_CartLine_Products_ProductID",
+                        column: x => x.ProductID,
+                        principalTable: "Products",
+                        principalColumn: "ProductID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -112,6 +159,16 @@ namespace StoreApp.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_CartLine_OrderId",
+                table: "CartLine",
+                column: "OrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CartLine_ProductID",
+                table: "CartLine",
+                column: "ProductID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Products_CategoryId",
                 table: "Products",
                 column: "CategoryId");
@@ -120,6 +177,12 @@ namespace StoreApp.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "CartLine");
+
+            migrationBuilder.DropTable(
+                name: "Orders");
+
             migrationBuilder.DropTable(
                 name: "Products");
 

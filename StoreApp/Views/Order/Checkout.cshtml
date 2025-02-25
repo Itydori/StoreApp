@@ -1,0 +1,30 @@
+@model Order
+<form>
+    <div class="form-group my-3">
+        <label asp-for="OrderName" ></label>
+        <input class="form-control"asp-for="OrderName">
+    </div>
+    <div class="form-group my-3">   
+        <label asp-for="Line1" ></label>
+        <input class="form-control"asp-for="Line1">
+    </div>
+    <div class="form-group my-3">
+        <label asp-for="Line2" ></label>
+        <input class="form-control"asp-for="Line2">
+    </div>
+    <div class="form-group my-3">
+        <label asp-for="Line3" ></label>
+        <input class="form-control"asp-for="Line3">
+    </div>
+    <div class="form-group my-3">
+        <label asp-for="City" ></label>
+        <input class="form-control"asp-for="City">
+    </div>
+    <div class="form-group my-3">
+        <input asp-for="GiftWrap" ></input>
+        <label>Gift Wrap these Items</label> 
+    </div>
+    <div class="form-group my-3">
+        <button type="submit" class="btn btn-primary">Place Order</button>
+    </div>
+</form>

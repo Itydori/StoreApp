@@ -14,7 +14,6 @@
     </div>
 </div>       *@
 @model Product
-
 <div class="col-sm-12 col-md-4 my-2">
     <div class="card h-100" style="width: 18rem;">
         <img src="@Model?.ImageUrl" class="card-img-top" style="height: 200px; object-fit: contain;">
@@ -27,7 +26,7 @@
                     </a>
                 <form id="@Model.ProductID" asp-page="/cart" method="post">
                     <input type="hidden" asp-for="ProductID"/>
-                    <input type="hidden" name="returnUrl" value="/Product/Get/@Model.ProductID" />
+                    <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
                     <button type="submit" class="btn btn-outline-primary">
                         <i class="fa fa-cart-plus" 18rem></i>Add to Cart
                     </button>
